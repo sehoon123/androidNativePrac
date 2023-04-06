@@ -11,12 +11,6 @@ class MainActivity2 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // get phone number from intent
-        val phoneNum = intent.getStringExtra("phoneNum")
-
-        // put phoneNum using putExtra
-        intent.putExtra("phoneNum", phoneNum)
-
         // set result
         setResult(RESULT_OK, intent)
 
