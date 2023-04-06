@@ -12,7 +12,16 @@ import com.example.myapplication.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     // register for activity result
-    val requestLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),{})
+    val requestLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),{
+        // check if result is ok
+        if (it.resultCode == Activity.RESULT_OK) {
+            // get phone number from intent
+            val phoneNum = it.data?.getStringExtra("phoneNum")
+
+            // show toast
+            Toast.makeText(this, "You can't call to ${phoneNum}", Toast.LENGTH_SHORT).show()
+        }
+    })
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

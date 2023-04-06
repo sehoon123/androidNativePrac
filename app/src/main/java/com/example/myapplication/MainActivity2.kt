@@ -14,8 +14,9 @@ class MainActivity2 : AppCompatActivity() {
         // get phone number from intent
         val phoneNum = intent.getStringExtra("phoneNum")
 
-        // show toast
-        Toast.makeText(this, "You can't call to ${phoneNum}", Toast.LENGTH_SHORT).show()
+        // put phoneNum using putExtra
+        intent.putExtra("phoneNum", phoneNum)
+        setResult(RESULT_OK, intent)
 
         // finish activity and return to previous activity
         finish()
