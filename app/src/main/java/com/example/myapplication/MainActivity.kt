@@ -5,31 +5,41 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.myapplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-//    val requestLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-//        if (result.resultCode == Activity.RESULT_OK) {
-//            val data: Intent? = result.data
-//        }
-//    }
+    // register for activity result
+    val requestLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult(),{})
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        // enable binding
+        // enable viewBinding
         val binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // set onClickListener for button
         binding.btnReply.setOnClickListener({
-//            val phoneNumber = binding.txtReply.text.toString()
-            val intent = Intent(Intent.ACTION_DIAL)
+            // get phone number from user input
+            val phoneNumber = binding.txtReply.text.toString()
+
+            // parse phone number to uri
+            val uri = Uri.parse("tel:$phoneNumber")
+
+            // create intent
+            val intent = Intent(Intent.ACTION_DIAL, uri)
+
+            // put phone number to intent for next activity
+            intent.putExtra("phoneNum", phoneNumber)
+
+            // create chooser
             val chooser = Intent.createChooser(intent, "Which app to use?")
 
-            startActivity(chooser)
+            requestLauncher.launch(chooser)
         })
     }
 }

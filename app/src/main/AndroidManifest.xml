@@ -16,6 +16,7 @@
         <activity
             android:name=".MainActivity2"
             android:exported="true">
+            <!-- make this activity to handle ACTION_DIAL -->
             <intent-filter>
                 <action android:name="android.intent.action.DIAL" />
                 <category android:name="android.intent.category.DEFAULT" />
