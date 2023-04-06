@@ -16,6 +16,8 @@ class MainActivity2 : AppCompatActivity() {
 
         // put phoneNum using putExtra
         intent.putExtra("phoneNum", phoneNum)
+
+        // set result
         setResult(RESULT_OK, intent)
 
         // finish activity and return to previous activity
